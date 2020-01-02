@@ -80,11 +80,11 @@ p {
 .btn {
   display: block;
   cursor: pointer;
-  width: 18rem;
+  width: 16rem;
   margin: 1.4rem auto;
   padding: 1.4rem;
   color: var(--dark-text);
-  border: 2px solid var(--primary-text);
+  border: 1px solid var(--primary-text);
   background-color: var(--primary-text);
   border-radius: 8px;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, .1);
@@ -113,8 +113,6 @@ p {
   }
 
   &--rules {
-    width: unset;
-    padding: 1.4rem 2.2rem;
     background-color: transparent;
     color: var(--primary-text);
   }
@@ -164,15 +162,14 @@ p {
 // Choose game type
 .game-type {
   position: absolute;
-  // width: 100%;
   top: 15rem;
   left: 50%;
   transform: translateX(-50%);
   padding: 2.4rem;
-  opacity: 1;
+  opacity: 0;
 
-  &--fadeout {
-    opacity: 0;
+  &--active {
+    opacity: 1;
     transition: opacity 350ms ease;
   }
 }
@@ -210,10 +207,8 @@ p {
     }
   }
 
-  &__rock,
-  &__paper,
-  &__scissors {
-    display: flex;
+  &__paper {
+    justify-self: flex-start;
   }
 
   &__rock,
