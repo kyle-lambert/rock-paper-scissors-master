@@ -1,37 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- Font awesome -->
+  <script src="https://kit.fontawesome.com/0856dd953e.js" crossorigin="anonymous"></script>
+
+  <script src="js/app.js" defer></script>
   <title>Frontend Mentor | Rock, Paper, Scissors</title>
-
-  Score
-  Rules
-
-  You Picked
-  The House Picked
-
-  You Win
-  You Lose
-
-  Play Again
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
+
 <body>
+  <header class="header">
+    <div class="scoreboard">
+      <img src="images/logo.svg" alt="Game logo" class="scoreboard__logo">
+
+      <div class="scoreboard__score-box">
+        <p class="scoreboard__header">Score</p>
+        <p class="scoreboard__score">0</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="game-type game-type--fadeout">
+      <h1 class="game-type__header">Select Game Type</h1>
+      <button class="btn">Standard</button>
+      <button class="btn">Lizard Spock</button>
+    </section>
+
+    <section class="game game--active">
+      <div class="game__wrapper">
+        <div class="game__rock">
+          <button class="btn--game btn--rock">
+            <img src="images/icon-rock.svg" alt="Rock icon" class="game__img">
+          </button>
+        </div>
+
+        <div class="game__paper">
+          <button class="btn--game btn--paper">
+            <img src="images/icon-paper.svg" alt="Paper icon" class="game__img">
+          </button>
+        </div>
+
+        <div class="game__scissors">
+          <button class="btn--game btn--scissors">
+            <img src="images/icon-scissors.svg" alt="Scissors icon" class="game__img">
+          </button>
+        </div>
+      </div>
+
+      <button class="btn btn--rules">Rules</button>
+
+      <div class="rules rules--active">
+        <div class="rules__topbar">
+          <h2 class="rules__header">Rules</h2>
+          <button class="btn btn--exit">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <img src="images/image-rules.svg" alt="Game rules">
+      </div>
+    </section>
 
 
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+
+
+  </main>
+
 </body>
+
 </html>
