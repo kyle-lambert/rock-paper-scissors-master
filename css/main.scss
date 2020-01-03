@@ -91,8 +91,8 @@ p {
 
   &--game {
     cursor: pointer;
-    height: 15rem;
-    width: 15rem;
+    height: 13rem;
+    width: 13rem;
     background-color: #fff;
     border-radius: 50%;
   }
@@ -115,6 +115,13 @@ p {
   &--rules {
     background-color: transparent;
     color: var(--primary-text);
+  }
+
+  &--exit {
+    width: unset;
+    padding: 1rem;
+    box-shadow: unset;
+    margin: 0;
   }
 }
 
@@ -160,67 +167,97 @@ p {
 }
 
 // Choose game type
+.main {
+  padding: 2.6rem;
+}
+
 .game-type {
-  position: absolute;
-  top: 15rem;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 2.4rem;
-  opacity: 0;
+  display: none;
 
   &--active {
-    opacity: 1;
-    transition: opacity 350ms ease;
+    display: block;
   }
 }
 
 .game {
-  position: absolute;
-  width: 100%;
-  top: 15rem;
-  padding: 2.6rem;
-  opacity: 1;
+  display: none;
+
+  &--active {
+    display: block;
+  }
 
   &__wrapper {
-    position: relative;
-    margin-top: 3rem;
-    margin-bottom: 6rem;
+    margin: 0 auto 6rem;
     display: grid;
+
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    column-gap: 6rem;
     row-gap: 3rem;
+    column-gap: 5rem;
+    background-image: url(/images/bg-triangle.svg);
+    background-repeat: no-repeat;
+    background-size: 25rem;
+    background-position: bottom center;
+  }
 
-    &::after {
-      content: '';
-      position: absolute;
-      background-image: url(/images/bg-triangle.svg);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      height: 25rem;
-      width: 25rem;
-      left: 50%;
-      top: calc(50% + 1.5rem);
-      transform: translate(-50%, -50%);
-      z-index: -1;
-    }
+  &__rock {
+    justify-self: flex-end;
+    position: relative;
+    right: 0;
+    grid-column: 1 / 2;
+    grid-row: 1 / 1;
   }
 
   &__paper {
     justify-self: flex-start;
-  }
-
-  &__rock,
-  &__scissors {
-    justify-self: flex-end;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
   }
 
   &__scissors {
-    transform: translateX(calc(50% + 3rem));
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
   }
 }
 
 .rules {
+  position: absolute;
   display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-text);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+
+  &__box {
+    background-color: var(--primary-text);
+    max-width: 50rem;
+    width: 80%;
+    padding: 2rem;
+    border-radius: 5px;
+  }
+
+  &__topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  &__header {
+    color: var(--dark-text);
+    margin-bottom: 0;
+  }
+
+  &__img {
+    padding: 0 2rem;
+    width: 100%;
+  }
+
+  &--active {
+    display: flex;
+  }
 }
