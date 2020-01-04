@@ -33,47 +33,54 @@
       <button class="btn">Lizard Spock</button>
     </section>
 
-    <section class="game game--active">
-      <div class="game__wrapper">
-        <div class="game__rock">
-          <button class="btn--game btn--rock">
-            <img src="images/icon-rock.svg" alt="Rock icon" class="game__img">
-          </button>
-        </div>
+    <section class="s1 s1--acti">
+      <div class="s1__buttons">
+        <button class="btn--game btn--rock">
+          <img src="images/icon-rock.svg" alt="Rock" class="s1__img">
+        </button>
 
-        <div class="game__paper">
-          <button class="btn--game btn--paper">
-            <img src="images/icon-paper.svg" alt="Paper icon" class="game__img">
-          </button>
-        </div>
+        <button class="btn--game btn--paper">
+          <img src="images/icon-paper.svg" alt="Paper" class="s1__img">
+        </button>
 
-        <div class="game__scissors">
-          <button class="btn--game btn--scissors">
-            <img src="images/icon-scissors.svg" alt="Scissors icon" class="game__img">
-          </button>
-        </div>
+        <button class="btn--game btn--scissors">
+          <img src="images/icon-scissors.svg" alt="Scissors" class="s1__img">
+        </button>
       </div>
 
       <button class="btn btn--rules">Rules</button>
-
-      <div class="rules">
-        <div class="rules__box">
-          <div class="rules__topbar">
-            <h2 class="rules__header">Rules</h2>
-            <button class="btn btn--exit">
-              <i class="fas fa-times"></i>
-            </button>
-          </div>
-
-          <img class="rules__img" src="images/image-rules.svg" alt="Game rules">
-        </div>
-      </div>
-
     </section>
 
 
+    <section class="s2 s2--acti">
+      <div class="choice choice--user">
+        <h2 class="choice__header">You Picked</h2>
+        <div class="choice__dot choice__dot--rock">
+          <img src="images/icon-rock.svg" alt="Rock" class="choice__img">
+        </div>
+      </div>
+
+      <div class="choice choice--house">
+        <h2 class="choice__header">The House Picked</h2>
+        <div class="choice__dot choice__dot--loading"></div>
+      </div>
+    </section>
+
+    <button class="btn btn--rules">Rules</button>
 
 
+    <section class="rules rules--acti">
+      <div class="rules__box">
+        <div class="rules__topbar">
+          <h2 class="rules__header">Rules</h2>
+          <button class="btn btn--exit">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <img class="rules__img" src="images/image-rules.svg" alt="Game rules">
+      </div>
+    </section>
   </main>
 
 </body>
