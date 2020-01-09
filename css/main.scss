@@ -262,23 +262,7 @@ p {
   padding: 2.6rem;
 }
 
-.select-game {
-  display: none;
-
-
-  &--active {
-    display: block;
-  }
-}
-
 // User selection
-.user-select {
-  display: none;
-
-  &--active {
-    display: block;
-  }
-}
 
 .buttons-wrap {
   display: grid;
@@ -295,7 +279,7 @@ p {
 // House selection
 .house-select {
   margin: 0 auto;
-  display: none;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   max-width: 100rem;
   gap: 1rem;
@@ -319,17 +303,13 @@ p {
   &__header {
     margin-bottom: 3rem;
   }
-
-  &--active {
-    display: grid;
-  }
 }
 
 // Results display
 .result {
   margin: 0 auto;
   max-width: 100rem;
-  display: none;
+  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr auto;
   column-gap: 2rem;
@@ -369,17 +349,13 @@ p {
   &__header {
     margin-bottom: 3rem;
   }
-
-  &--active {
-    display: grid;
-  }
 }
 
 
 // Rules pop-up
 .rules {
   position: absolute;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-text);
@@ -413,10 +389,6 @@ p {
   &__img {
     padding: 0 2rem;
     width: 100%;
-  }
-
-  &--active {
-    display: flex;
   }
 }
 

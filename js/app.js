@@ -11,6 +11,7 @@ let gameController = (function () {
 
 let UIcontroller = (function () {
   const elements = {
+    mainContainer: document.querySelector('.main'),
     gameScore: document.querySelector('.scoreboard__score'),
     standardTypeButton: document.getElementById('standardButton'),
     gameType: document.querySelector('.select-game'),
@@ -20,24 +21,80 @@ let UIcontroller = (function () {
     rules: document.querySelector('.rules')
   }
 
-  let renderUserChoice = function (choice) {
-    const html = `
-      <div class="house-select__user">
-        <h2 class="house-select__header">You Picked</h2>
-        <div class="dot dot--${choice}">
-          <img src="images/icon-${choice}.svg" alt="${choice}" class="house-select__img">
-        </div>
-      </div>
-
-      <div class="house-select__house">
-        <h2 class="house-select__header">The House Picked</h2>
-        <div class="dot dot--loading"></div>
-      </div>
-    `
-    elements.computerChoice.insertAdjacentHTML('beforeend', html);
+  let clearContainer = function () {
+    elements.mainContainer.innerHTML = '';
   }
 
-  let renderGameResult = function (userChoice, computerChoice) {
+  let selectStandardGame = function () {
+    // Prepare UI for standard game type
+    clearContainer();
+    // Render standard game type
+    renderStandardGame();
+  }
+
+  let selectSpockGame = function () {
+    alert('Gametype: Lizard Spock')
+  }
+
+  let userSelect = function (choice) {
+    // Prepare UI for user choice display
+    clearContainer();
+    // Display user choice
+    renderUserChoice(choice);
+  }
+
+  let renderHomeScreen = function () {
+    const html = `
+      <section class="select-game">
+        <h1 class="select-game__header">Select Game Type</h1>
+        <button class="btn" id="standardButton">Standard</button>
+        <button class="btn" id="spockButton">Lizard Spock</button>
+      </section>
+    `
+    elements.mainContainer.insertAdjacentHTML('beforeend', html);
+  }
+
+  let renderStandardGame = function () {
+    const html = `
+      <section class="user-select">
+      <div class="buttons-wrap">
+        <button class="btn--game btn--rock">
+          <img src="images/icon-rock.svg" alt="Rock" class="buttons-wrap__img">
+        </button>
+
+        <button class="btn--game btn--paper">
+          <img src="images/icon-paper.svg" alt="Paper" class="buttons-wrap__img">
+        </button>
+
+        <button class="btn--game btn--scissors">
+          <img src="images/icon-scissors.svg" alt="Scissors" class="buttons-wrap__img">
+        </button>
+      </div>
+    </section>
+    `
+    elements.mainContainer.insertAdjacentHTML('beforeend', html);
+  }
+
+  let renderUserChoice = function (choice) {
+    const html = `
+      <section class="house-select">
+        <div class="house-select__user">
+          <h2 class="house-select__header">You Picked</h2>
+          <div class="dot dot--${choice}">
+            <img src="images/icon-${choice}.svg" alt="${choice}" class="house-select__img">
+          </div>
+        </div>
+
+        <div class="house-select__house">
+          <h2 class="house-select__header">The House Picked</h2>
+          <div class="dot dot--loading"></div>
+        </div>
+      </section>
+    `
+    elements.mainContainer.insertAdjacentHTML('beforeend', html);
+  }
+
+  let renderGameSection = function (userChoice, computerChoice) {
     setTimeout(() => {
       const html = `
         <div class="result__user">
@@ -67,17 +124,20 @@ let UIcontroller = (function () {
     DOMelements: function () {
       return elements;
     },
-    addClassName: function (element, className) {
-      element.classList.add(className);
+    clearContainer: function () {
+      return clearContainer();
     },
-    removeClassName: function (element, className) {
-      element.classList.remove(className);
+    renderHomeScreen: function () {
+      return renderHomeScreen();
     },
-    renderUserChoice: function (choice) {
-      return renderUserChoice(choice);
+    selectStandardGame: function () {
+      return selectStandardGame();
     },
-    renderGameResult: function (userChoice, computerChoice) {
-      return renderGameResult(userChoice, computerChoice);
+    selectSpockGame: function () {
+      return selectSpockGame();
+    },
+    userSelect: function (choice) {
+      return userSelect(choice);
     }
   }
 
@@ -86,42 +146,36 @@ let UIcontroller = (function () {
 let controller = (function (gameCtrl, UIctrl) {
   const DOMelements = UIctrl.DOMelements();
 
-  DOMelements.standardTypeButton.addEventListener('click', () => {
-    UIctrl.removeClassName(DOMelements.gameType, 'select-game--active');
-    UIctrl.addClassName(DOMelements.userChoice, 'user-select--active');
+  DOMelements.mainContainer.addEventListener('click', (e) => {
+    // User select game type
+    if (e.target.closest('#standardButton')) {
+      UIctrl.selectStandardGame();
+    }
+    if (e.target.closest('#spockButton')) {
+      UIctrl.selectSpockGame();
+    }
+
+    if (e.target.closest('.btn--rock')) {
+      UIctrl.userSelect('rock');
+    };
+    if (e.target.closest('.btn--paper')) {
+      UIctrl.userSelect('paper');
+    };
+    if (e.target.closest('.btn--scissors')) {
+      UIctrl.userSelect('scissors');
+    };
   });
 
-  DOMelements.userChoice.querySelectorAll('.btn--game').forEach(button => {
-    button.addEventListener('click', (e) => {
-      const isRock = e.target.closest('.btn--rock');
-      const isPaper = e.target.closest('.btn--paper');
-      const isScissors = e.target.closest('.btn--scissors');
-
-      if (isRock) {
-        UIctrl.renderUserChoice('rock');
-        UIctrl.renderGameResult('rock', gameCtrl.getComputerChoice());
-      }
-      if (isPaper) {
-        UIctrl.renderUserChoice('paper');
-        UIctrl.renderGameResult('paper', gameCtrl.getComputerChoice());
-      }
-      if (isScissors) {
-        UIctrl.renderUserChoice('scissors');
-        UIctrl.renderGameResult('scissors', gameCtrl.getComputerChoice());
-      }
-
-      UIctrl.removeClassName(DOMelements.userChoice, 'user-select--active');
-      UIctrl.addClassName(DOMelements.computerChoice, 'house-select--active');
-      setTimeout(() => {
-        UIctrl.removeClassName(DOMelements.computerChoice, 'house-select--active');
-        UIctrl.addClassName(DOMelements.gameResult, 'result--active');
-      }, 3000)
-    })
-  });
+  let init = function () {
+    // Prepare UI for home screen
+    UIctrl.clearContainer();
+    // Display home screen
+    UIctrl.renderHomeScreen();
+  }
 
   return {
     init: function () {
-      UIctrl.addClassName(DOMelements.gameType, 'select-game--active');
+      return init();
     }
   }
 
