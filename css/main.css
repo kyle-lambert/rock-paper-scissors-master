@@ -509,6 +509,10 @@ p {
     height: 16rem;
     width: 16rem;
   }
+  .scoreboard {
+    width: 80rem;
+    margin: 0 auto;
+  }
   .result {
     -ms-grid-columns: 1fr auto 1fr;
         grid-template-columns: 1fr auto 1fr;

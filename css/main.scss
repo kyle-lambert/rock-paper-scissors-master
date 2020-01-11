@@ -433,6 +433,11 @@ p {
     }
   }
 
+  .scoreboard {
+    width: 80rem;
+    margin: 0 auto;
+  }
+
   .result {
     grid-template-columns: 1fr auto 1fr;
     column-gap: 2rem;
