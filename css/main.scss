@@ -355,7 +355,7 @@ p {
 // Rules pop-up
 .rules {
   position: absolute;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: var(--primary-text);
@@ -389,6 +389,10 @@ p {
   &__img {
     padding: 0 2rem;
     width: 100%;
+  }
+
+  &--active {
+    display: flex;
   }
 }
 
