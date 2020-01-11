@@ -156,7 +156,7 @@ p {
 .btn--rules {
   position: absolute;
   bottom: 2.6rem;
-  right: 2.6rem;
+  left: 2.6rem;
   margin: 0;
   background-color: transparent;
   color: var(--primary-text);
