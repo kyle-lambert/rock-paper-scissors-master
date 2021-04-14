@@ -2,50 +2,50 @@ let gameController = (function () {
   let userScore = 0;
 
   const getComputerChoice = function () {
-    const options = ['rock', 'paper', 'scissors'];
+    const options = ["rock", "paper", "scissors"];
     return options[Math.floor(Math.random() * 3)];
-  }
+  };
 
   return {
     getComputerChoice: function () {
       return getComputerChoice();
     },
-    userScore: userScore
-  }
+    userScore: userScore,
+  };
 })();
 
 let UIcontroller = (function () {
   const elements = {
-    mainContainer: document.querySelector('.main'),
-    gameScore: document.querySelector('.scoreboard__score'),
-    standardTypeButton: document.getElementById('standardButton'),
-    gameType: document.querySelector('.select-game'),
-    userChoice: document.querySelector('.user-select'),
-    computerChoice: document.querySelector('.house-select'),
-    gameResult: document.querySelector('.result'),
-    footer: document.querySelector('.footer'),
-    rulesButton: document.querySelector('.btn--rules'),
-    rulesExit: document.querySelector('.btn--exit'),
-    rules: document.querySelector('.rules')
-  }
+    mainContainer: document.querySelector(".main"),
+    gameScore: document.querySelector(".scoreboard__score"),
+    standardTypeButton: document.getElementById("standardButton"),
+    gameType: document.querySelector(".select-game"),
+    userChoice: document.querySelector(".user-select"),
+    computerChoice: document.querySelector(".house-select"),
+    gameResult: document.querySelector(".result"),
+    footer: document.querySelector(".footer"),
+    rulesButton: document.querySelector(".btn--rules"),
+    rulesExit: document.querySelector(".btn--exit"),
+    rules: document.querySelector(".rules"),
+  };
 
   let clearContainer = function () {
-    elements.mainContainer.innerHTML = '';
-  }
+    elements.mainContainer.innerHTML = "";
+  };
 
   let updateUserScore = function (score) {
     elements.gameScore.innerHTML = score;
-  }
+  };
 
   let selectStandardGame = function () {
     clearContainer();
     renderStandardGame();
-  }
+  };
 
   let userSelect = function (choice) {
     clearContainer();
     renderUserChoice(choice);
-  }
+  };
 
   // let renderHomeScreen = function () {
   //   const html = `
@@ -75,9 +75,9 @@ let UIcontroller = (function () {
           </button>
         </div>
       </section>
-    `
-    elements.mainContainer.insertAdjacentHTML('beforeend', html);
-  }
+    `;
+    elements.mainContainer.insertAdjacentHTML("beforeend", html);
+  };
 
   let renderUserChoice = function (choice) {
     const html = `
@@ -94,18 +94,18 @@ let UIcontroller = (function () {
           <div class="dot dot--loading"></div>
         </div>
       </section>
-    `
-    elements.mainContainer.insertAdjacentHTML('beforeend', html);
-  }
+    `;
+    elements.mainContainer.insertAdjacentHTML("beforeend", html);
+  };
 
   let renderResult = function (user, computer, result) {
     let gameResult;
-    if (result === 'win') {
-      gameResult = 'You Win';
-    } else if (result === 'lose') {
-      gameResult = 'You Lose';
+    if (result === "win") {
+      gameResult = "You Win";
+    } else if (result === "lose") {
+      gameResult = "You Lose";
     } else {
-      gameResult = 'It\'s a draw';
+      gameResult = "It's a draw";
     }
 
     const html = `
@@ -129,9 +129,9 @@ let UIcontroller = (function () {
           </div>
         </div>
       </section>
-    `
-    elements.mainContainer.insertAdjacentHTML('beforeend', html);
-  }
+    `;
+    elements.mainContainer.insertAdjacentHTML("beforeend", html);
+  };
 
   return {
     DOMelements: function () {
@@ -150,10 +150,9 @@ let UIcontroller = (function () {
       return userSelect(choice);
     },
     updateUserScore: function (score) {
-      return updateUserScore(score)
-    }
-  }
-
+      return updateUserScore(score);
+    },
+  };
 })();
 
 let controller = (function (gameCtrl, UIctrl) {
@@ -166,68 +165,70 @@ let controller = (function (gameCtrl, UIctrl) {
     let addWinnerClass = function (result) {
       UIctrl.renderResult(user, comp, result);
 
-      let userDot = document.getElementById('userDot');
-      let computerDot = document.getElementById('computerDot');
+      let userDot = document.getElementById("userDot");
+      let computerDot = document.getElementById("computerDot");
 
-      if (result === 'win') {
-        userDot.classList.add('dot--win');
-      } else if (result === 'lose') {
-        computerDot.classList.add('dot--win');
+      if (result === "win") {
+        userDot.classList.add("dot--win");
+      } else if (result === "lose") {
+        computerDot.classList.add("dot--win");
       } else {
-        userDot.classList.remove('dot--win');
-        computerDot.classList.remove('dot--win');
+        userDot.classList.remove("dot--win");
+        computerDot.classList.remove("dot--win");
       }
-    }
+    };
 
     let subtractUserScore = function () {
-      gameCtrl.userScore--;
+      if (gameCtrl.userScore > 0) {
+        gameCtrl.userScore--;
+      }
       UIctrl.updateUserScore(gameCtrl.userScore);
-    }
+    };
 
     let addUserScore = function () {
       gameCtrl.userScore++;
       UIctrl.updateUserScore(gameCtrl.userScore);
-    }
+    };
 
     switch (compare) {
-      case 'rockrock':
-        addWinnerClass('draw');
+      case "rockrock":
+        addWinnerClass("draw");
         break;
-      case 'rockpaper':
-        addWinnerClass('lose');
+      case "rockpaper":
+        addWinnerClass("lose");
         subtractUserScore();
         break;
-      case 'rockscissors':
-        addWinnerClass('win');
+      case "rockscissors":
+        addWinnerClass("win");
         addUserScore();
         break;
-      case 'paperrock':
-        addWinnerClass('win');
+      case "paperrock":
+        addWinnerClass("win");
         addUserScore();
         break;
-      case 'paperpaper':
-        addWinnerClass('draw');
+      case "paperpaper":
+        addWinnerClass("draw");
         break;
-      case 'paperscissors':
-        addWinnerClass('lose');
+      case "paperscissors":
+        addWinnerClass("lose");
         subtractUserScore();
         break;
-      case 'scissorsrock':
-        addWinnerClass('lose');
+      case "scissorsrock":
+        addWinnerClass("lose");
         subtractUserScore();
         break;
-      case 'scissorspaper':
-        addWinnerClass('win');
+      case "scissorspaper":
+        addWinnerClass("win");
         addUserScore();
         break;
-      case 'scissorsscissors':
-        addWinnerClass('draw');
+      case "scissorsscissors":
+        addWinnerClass("draw");
         break;
 
       default:
         break;
     }
-  }
+  };
 
   let startGame = function (user) {
     UIctrl.userSelect(user);
@@ -236,50 +237,49 @@ let controller = (function (gameCtrl, UIctrl) {
       const compChoice = gameCtrl.getComputerChoice();
       const userChoice = user;
       compareResult(userChoice, compChoice);
-    }, 3000)
-  }
+    }, 3000);
+  };
 
-  DOMelements.mainContainer.addEventListener('click', (e) => {
-    if (e.target.closest('#standardButton')) {
+  DOMelements.mainContainer.addEventListener("click", (e) => {
+    if (e.target.closest("#standardButton")) {
       UIctrl.selectStandardGame();
     }
-    if (e.target.closest('.btn--rock')) {
-      startGame('rock');
-    };
-    if (e.target.closest('.btn--paper')) {
-      startGame('paper');
-    };
-    if (e.target.closest('.btn--scissors')) {
-      startGame('scissors');
-    };
-    if (e.target.closest('.btn--play-again')) {
+    if (e.target.closest(".btn--rock")) {
+      startGame("rock");
+    }
+    if (e.target.closest(".btn--paper")) {
+      startGame("paper");
+    }
+    if (e.target.closest(".btn--scissors")) {
+      startGame("scissors");
+    }
+    if (e.target.closest(".btn--play-again")) {
       playAgain();
     }
   });
 
-  DOMelements.footer.addEventListener('click', function (e) {
-    if (e.target.closest('.btn--rules')) {
-      DOMelements.rules.classList.add('rules--active');
+  DOMelements.footer.addEventListener("click", function (e) {
+    if (e.target.closest(".btn--rules")) {
+      DOMelements.rules.classList.add("rules--active");
     }
-    if (e.target.closest('.btn--exit')) {
-      DOMelements.rules.classList.remove('rules--active');
+    if (e.target.closest(".btn--exit")) {
+      DOMelements.rules.classList.remove("rules--active");
     }
-  })
+  });
 
   let init = function () {
     gameCtrl.userScore = 0;
     UIctrl.selectStandardGame();
-  }
+  };
 
   let playAgain = function () {
     UIctrl.selectStandardGame();
-  }
+  };
 
   return {
     init: function () {
       return init();
-    }
-  }
-
+    },
+  };
 })(gameController, UIcontroller);
 controller.init();
